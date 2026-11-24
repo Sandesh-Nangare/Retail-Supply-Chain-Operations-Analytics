@@ -176,7 +176,9 @@ FROM customers;
 -- B. Products & Categories Cleaning
 -- -----------------------------------------------------------------------------
 
--- 1. Check for negative prices or zero cost in Products
+-- 1. Check for invalid product prices
+-- Note: the committed products.csv and verified MySQL schema expose 'price'.
+-- No unit_cost field is currently available, so margin/cost validation is out of scope.
 SELECT *
 FROM products
 WHERE price <= 0;
