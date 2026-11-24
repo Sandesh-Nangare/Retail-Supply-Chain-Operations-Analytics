@@ -176,15 +176,16 @@ FROM customers;
 -- B. Products & Categories Cleaning
 -- -----------------------------------------------------------------------------
 
--- 1. Check for negative prices or zero cost in Products
+-- 1. Check for invalid product prices
+-- Note: the committed products.csv and verified MySQL schema expose 'price'.
+-- No unit_cost field is currently available, so margin/cost validation is out of scope.
 SELECT *
 FROM products
 WHERE price <= 0;
 
--- 2. Standardize Product Names and Categories (Remove extra whitespaces)
-UPDATE products
-SET product_name = TRIM(product_name);
-
+-- 2. Standardize category labels.
+-- The committed products.csv and verified products table do not contain
+-- a product_name column, so do not attempt to update one.
 UPDATE categories
 SET category_name = TRIM(category_name);
 
@@ -237,14 +238,11 @@ WHERE r.refund > (oi.price * oi.qty);
 -- E. Employees & Stores Integrity
 -- -----------------------------------------------------------------------------
 
--- 1. Standardize Employee emails and trim names
-UPDATE employees
-SET 
-    first_name = TRIM(first_name),
-    last_name  = TRIM(last_name),
-    email      = LOWER(TRIM(email));
+-- The committed employees.csv header contains employee_id, store_id, salary.
+-- Do not update first_name/last_name/email unless those columns are confirmed
+-- in the imported MySQL table. Validate store references below.
 
--- 2. Check for Employees assigned to non-existent stores
+-- 1. Check for Employees assigned to non-existent stores
 SELECT e.*
 FROM employees e
 LEFT JOIN stores s ON e.store_id = s.store_id
