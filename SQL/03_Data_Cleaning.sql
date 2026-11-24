@@ -179,8 +179,7 @@ FROM customers;
 -- 1. Check for negative prices or zero cost in Products
 SELECT *
 FROM products
-WHERE unit_price <= 0 
-   OR unit_cost < 0;
+WHERE price <= 0;
 
 -- 2. Standardize Product Names and Categories (Remove extra whitespaces)
 UPDATE products
