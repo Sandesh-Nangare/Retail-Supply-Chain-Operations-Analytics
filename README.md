@@ -58,7 +58,7 @@ See [Data Dictionary](docs/DATA_DICTIONARY.md) for the fields identified in the 
 - `SQL/01_Database_Overview.sql` — schema and sample-row inspection.
 - `SQL/02_Data_Quality_Audit.sql` — table-level data-quality checks.
 - `SQL/03_Data_Cleaning.sql` — validation and cleaning operations.
-- `SQL/04_Data_Analysis.sql` — executive, customer, product/category and operations analyses.
+- `SQL/04_Data_Analysis.sql` — executive, customer, product/category and operations analyses.\n- `SQL/05_Product_Data_Validation.sql` — reproducible read-only product quality checks.
 - `Images/` — visual assets and screenshots currently committed.
 - `Datasets/` — source CSV files.
 
